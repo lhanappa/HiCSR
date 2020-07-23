@@ -9,6 +9,8 @@ class HiCPreprocessor():
         self.input_filepath = args.input
         self.hr_filepaths = glob.glob(self.input_filepath+'hr/*')
         self.lr_filepaths = glob.glob(self.input_filepath+'lr/*')
+        self.hr_filepaths.sort()
+        self.lr_filepaths.sort()
         self.output_filepath = args.output
 
     def save_hic_mat(self, mat, outfile):
@@ -48,6 +50,8 @@ class HiCPreprocessor():
         else:
             lr_paths, hr_paths = glob.glob(self.input_filepath+'lr/*'), glob.glob(self.input_filepath+'hr/*')
 
+        lr_paths.sort()
+        hr_paths.sort()
         for lr_path, hr_path in zip(lr_paths, hr_paths):
             print('Splitting {}'.format(lr_path.split('/')[-1]))
             print('Splitting {}'.format(hr_path.split('/')[-1]))
@@ -121,8 +125,8 @@ if __name__ == '__main__':
     s = HiCPreprocessor(args)
 
     if os.path.exists(args.output):
-        print("output path already exists. Overwrite? (y/n)")
-        overwrite = input()
+        print("output path already exists. Overwrite it.")
+        overwrite = 'y' #input()
         if overwrite.lower() == 'y':
             shutil.rmtree(args.output)
             s.build_output_dir()
