@@ -28,6 +28,7 @@ class HiCPreprocessor():
     def normalize_pairs(self):
         for lr_path, hr_path in zip(self.lr_filepaths, self.hr_filepaths):
             print('Normalizing {}'.format(lr_path.split('/')[-1]))
+            print('Normalizing {}'.format(hr_path.split('/')[-1]))
             lr_mat, hr_mat = np.loadtxt(lr_path), np.loadtxt(hr_path)
             lr_mat_norm, hr_mat_norm = self.normalize(lr_mat), self.normalize(hr_mat)
 
@@ -49,6 +50,7 @@ class HiCPreprocessor():
 
         for lr_path, hr_path in zip(lr_paths, hr_paths):
             print('Splitting {}'.format(lr_path.split('/')[-1]))
+            print('Splitting {}'.format(hr_path.split('/')[-1]))
             lr_mat, hr_mat = np.loadtxt(lr_path), np.loadtxt(hr_path)
             n_bins = lr_mat.shape[0]
 
@@ -75,6 +77,8 @@ class HiCPreprocessor():
                         hr_samples.append([hr_submatrix])
                         hr_coords.append(hr_submatrix_coords)
 
+            print("hr_samples shape: ", hr_samples.shape)
+            print("lr_samples shape: ", lr_samples.shape)
             chromosome = lr_path.split('/')[-1].split('-')[0]
             cell_type = lr_path.split('/')[-1].split('-')[1]
             self.save_splits(normalized, chromosome, cell_type, lr_samples, hr_samples, lr_coords, hr_coords)
