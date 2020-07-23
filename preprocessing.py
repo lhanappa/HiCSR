@@ -76,7 +76,8 @@ class HiCPreprocessor():
                         lr_coords.append(lr_submatrix_coords)
                         hr_samples.append([hr_submatrix])
                         hr_coords.append(hr_submatrix_coords)
-
+            hr_samples = np.asarray(hr_samples)
+            lr_samples = np.asarray(lr_samples)
             print("hr_samples shape: ", hr_samples.shape)
             print("lr_samples shape: ", lr_samples.shape)
             chromosome = lr_path.split('/')[-1].split('-')[0]
