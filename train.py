@@ -448,7 +448,7 @@ class DAEModel(ClassModel):
             target = target.cpu().detach().numpy()
             target_noisy = target_noisy.cpu().detach().numpy()
             output = output.cpu().detach().numpy()
-            self._log_epoch_images(self._writer, epoch, target_noisy, target, output, 30)
+            self._log_epoch_images(self._writer, epoch, target_noisy, target, output, 1) # target_noisy(16, 1, 28, 28)
 
             if epoch%20 == 0:
                 torch.save(self._model,'./experiments/{}/checkpoints/{}_ckpt_{}.pth'.format(self._hparams['experiment'], self.__class__.__name__, epoch))
