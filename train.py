@@ -465,9 +465,9 @@ class DAEModel(ClassModel):
                 fig, axs = plt.subplots(1,3, facecolor='w', edgecolor='k')
                 fig.subplots_adjust(hspace = .5, wspace=.1)
                 axs = axs.ravel()
-                logging.info("target_noisy shape{}".format(target_noisy.shape))
-                logging.info("target shape{}".format(target.shape))
-                logging.info("output shape{}".format(output.shape))
+                #logging.info("target_noisy shape{}".format(target_noisy.shape))
+                #logging.info("target shape{}".format(target.shape))
+                #logging.info("output shape{}".format(output.shape))
                 for j, mat in enumerate([target_noisy[i],target[i],output[i]]):
                     if mat.shape[-1] == 40:
                         mat = mat[:,6:34,6:34]
