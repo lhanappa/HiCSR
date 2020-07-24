@@ -308,7 +308,7 @@ class HiCSRModel(ClassModel):
                                    train_G_feature_loss,
                                    valid_image_loss)
 
-            self._log_epoch_images(self._writer, epoch, data, target, output, 20)
+            self._log_epoch_images(self._writer, epoch, data, target, output, 1)
 
             if epoch%20 == 0:
                 self._save_checkpoint(epoch, G_optimizer, D_optimizer)
