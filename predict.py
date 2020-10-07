@@ -48,7 +48,7 @@ if __name__ == '__main__':
     parser.add_argument('--model_fp', type=str, required=True, help="pytorch model filepath to load for enhancement predictions")
     args = parser.parse_args()
 
-    if os.path.exists(args.output):
+    """if os.path.exists(args.output):
         print("output path already exists. Overwrite? (y/n)")
         overwrite = input()
         if overwrite.lower() == 'y':
@@ -57,11 +57,13 @@ if __name__ == '__main__':
             os.mkdir(args.output+'{}'.format(args.model_type))
         else:
             exit()
-
     else:
-        os.mkdir(args.output)
-        os.mkdir(args.output+'{}'.format(args.model_type))
+        os.makedirs(args.output, exist_ok=True)
+        os.makedirs(args.output+'{}'.format(args.model_type))"""
 
+    os.makedirs(args.output, exist_ok=True)
+    os.makedirs(args.output+'{}'.format(args.model_type))
+        
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     if torch.cuda.is_available():
