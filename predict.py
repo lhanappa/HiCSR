@@ -62,7 +62,7 @@ if __name__ == '__main__':
         os.makedirs(args.output+'{}'.format(args.model_type))"""
 
     os.makedirs(args.output, exist_ok=True)
-    os.makedirs(args.output+'{}'.format(args.model_type))
+    os.makedirs(args.output+'{}'.format(args.model_type), exist_ok=True)
         
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
