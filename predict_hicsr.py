@@ -46,6 +46,7 @@ if __name__ == '__main__':
     parser.add_argument('--output', type=str, required=True, help="output directory to store resultant Hi-C matrices are stored")
     parser.add_argument('--model_type', type=str, required=True, help="model type to predict with, HiCSR or DAE (Denoising Autoencoder). HiCSR is used for Hi-C enhancement, DAE is the loss network used to train HiCSR")
     parser.add_argument('--model_fp', type=str, required=True, help="pytorch model filepath to load for enhancement predictions")
+    parser.add_argument('--resolution', type=str, required=True, help="pytorch model filepath to load for enhancement predictions")
     args = parser.parse_args()
 
     """if os.path.exists(args.output):
@@ -62,7 +63,7 @@ if __name__ == '__main__':
         os.makedirs(args.output+'{}'.format(args.model_type))"""
 
     os.makedirs(args.output, exist_ok=True)
-    os.makedirs(args.output+'{}'.format(args.model_type), exist_ok=True)
+    #os.makedirs(args.output+'{}'.format(args.model_type), exist_ok=True)
         
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -83,7 +84,7 @@ if __name__ == '__main__':
             HiCSR_predicted = predict(HiCSR, data=mat_lr, input_size=40, output_size=28)
             chromosome = pred_path.split('/')[-1].split('-')[0]
             cell_type = pred_path.split('/')[-1].split('-')[1]
-            file = 'predict_chr{}_40000.npz'.format(chromosome)
+            file = 'predict_{}_{}.npz'.format(chromosome, args.resolution)
             np.savez_compressed(os.path.join(args.output,file), hic=HiCSR_predicted)
             #np.savetxt(args.output+'{}-{}-16-HiCSR.txt.gz'.format(chromosome, cell_type), HiCSR_predicted, delimiter=' ', fmt='%.8f')
 
